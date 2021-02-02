@@ -1,0 +1,50 @@
+service:
+  name: auth-api
+
+custom:
+  stage: ${opt:stage}
+  jwtSecret: ${env:JWT_SECRET, 'DefaultJwtSecret'}
+  authToken: ${env:AUTH_TOKEN, 'ExpertsClub'}
+    
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: sa-east-1
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'logs:CreateLogGroup'
+        - 'logs:CreateLogStream'
+        - 'logs:PutLogEvents'
+      Resource: '*'
+
+package:
+  individually: true
+  exclude:
+    - 'src/**'
+    - 'jest.config.js'
+    - 'tsconfig.json'
+    - '.build/**'
+    - 'docs/**'
+    - 'coverage/**'
+    - '.env.example'
+    - 'package.json'
+    - 'auth.apib'
+    - 'auth-api-insomnia'
+
+functions:
+  main:
+    handler: dist/lambda.handler
+    warmup: true
+    timeout: 5
+    events:
+      - http:
+          cors: true
+          method: any
+          path: /{proxy+}
+    environment:
+      JWT_SECRET: ${self:custom.jwtSecret}
+      MONGODB_CONN_STRING: ${env:MONGODB_CONN_STRING}
+      AUTH_TOKEN: ${self:custom.authToken}
+      NODE_ENV: ${self:custom.stage}

@@ -1,0 +1,96 @@
+FORMAT: 1A
+
+# Auth
+Serviço para realizar autenticação de contas.
+
+# Group Auth
+Recursos relacionados à autenticação de usuários.
+
+## Login de usuário [/v1/auth/login]
+
+### Login de usuário [POST]
+
++ Request (application/json)
+    + Attributes
+        + email: `email@domain.com` (string, required) - User e-mail
+        + password: `123456` (string, required) - User password
+
++ Response 200 (application/json)
+    + Attributes
+        + token: `randomJWTtoken` (string) - Session token (JWT)
+
++ Request Invalid email/password (application/json)
+    + Attributes
+        + email: `email@domain.com` (string, required) - User e-mail
+        + password: `senha` (string, required) - User password
+
++ Response 400 (application/json)
+    + Attributes
+        + error: `Usuário/senha inválido` (string) - Mensagem de erro
+
+## ValidateToken User [/v1/auth/validate]
+
+### Validate [POST]
+
++ Request (application/json)
+    + Attributes
+        + token: `randomJWTtoken` (string, required) - Session token
+
++ Response 200 (application/json)
+
++ Request Invalid token (application/json)
+    + Attributes
+        + token: `randomJWTtoken` (string, required) - Session token
+
++ Response 400 (application/json)
+    + Attributes
+        + error: `Token inválido` (string) - Mensagem de erro
+
+# Group Usuários
+Recursos relacionados à gestão de usuários.
+
+## Cadastro de Usuário [/v1/users]
+
+### Cadastrar usuário [POST]
+
++ Request (application/json)
+    + Attributes (User)
+
++ Response 200 (application/json)
+    + Attributes (object)
+        + user (User)
+        + token: `randomJWTtoken` (string) - Session token (JWT)
+
++ Response 400 (application/json)
+    + Attributes
+        + errors (array)
+            + error: `E-mail é obrigatório` (string) - Mensagem de erro
+            + error: `Fullname é obrigatório` (string) - Mensagem de erro
+            + error: `E-mail já cadastrado` (string) - Mensagem de erro
+
++ Response 500 (application/json)
+    + Attributes
+        + error: `Ocorreu um erro inesperado` (string) - Mensagem de erro
+
+## Busca de usuário [/v1/users/{id}]
+
+### Buscar usuário [GET]
+
++ Parameters
+    + id: `5d5c507d37f6c21cbf26a9d8` (string, required) - Id do usuário
+
++ Response 200 (application/json)
+    + Attributes (User)
+
++ Response 500 (application/json)
+    + Attributes
+        + error: `Ocorreu um erro inesperado` (string) - Mensagem de erro
+
+## Data Structures
+
+### User (object)
++ `_id`: `50341373e894ad16347efe01` (string)
++ fullName: `Nome do cliente` (string, required)
++ email: `email@cliente.com.br` (string, required)
++ password: `123456` (string)
++ lastSeen (string)
