@@ -26,6 +26,7 @@ describe('UserService', () => {
 				});
 				fail(); // should never get to this line
 			} catch (err) {
+				fail();
 				expect(err.code).toEqual('EMAIL_REGISTERED');
 			}
 		});
