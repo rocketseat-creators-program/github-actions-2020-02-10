@@ -1,26 +1,12 @@
-## ExpertsClub Example Auth API
+<img src="https://storage.googleapis.com/golden-wind/experts-club/capa-github.svg" />
 
-Install dependencies:
-```sh
-$ yarn install
-```
+# Criando uma esteira de integração e deploy contínuo com GitHub Actions
 
-Pull and run `mongo:latest` docker image:
-```sh
-$ sudo docker pull mongo:latest
-$ sudo docker run --name mongo -d -p 27017:27017 mongo:latest
-```
----------
+Hoje existem muitas maneiras de automatizar etapas no fluxo de desenvolvimento de uma aplicação. É uma prática que traz muitos benefícios pra um time: velocidade, qualidade, segurança, facilidade pra colocar mudanças no ar e realizar rollbacks, e o mais importante, autonomia.
 
-### Usage
+Nesse vídeo vamos utilizar uma dessas maneiras, o GitHub Actions, pra construir uma esteira automatiza de integração e deploy contínuo, usando uma API de autenticação de exemplo. Vamos aprender um pouco sobre Workflows, Jobs e Actions, explorar o marketplace do GitHub, e entender a sintaxe básica da ferramenta.
+## Expert
 
-- Dev:
-    ```sh
-    $ yarn run dev
-    ```
-
-- To deploy at desired environment (if environment does not exist, it will automatically create a new one):
-    ```sh
-    $ yarn deploy --stage ENV_TO_DEPLOY
-    ```
-    AWS Credentials are required to be set up (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables) to deploy
+| [<img src="https://avatars.githubusercontent.com/u/18473447?s=460&u=7d3dc7548eb24ad23cfde756737fd6c94d579aaf&v=4" width="75px;"/>](https://github.com/eduardotkoller) |
+| :-: |
+|[Eduardo Koller](https://github.com/eduardotkoller)|
